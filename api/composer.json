@@ -1,0 +1,8 @@
+{
+    "require": {
+        "slim/slim": "^2.6",
+        "voku/simple-mysqli": "^1.8",
+        "tuupola/slim-basic-auth": "^0.12.0",
+        "tuupola/slim-jwt-auth": "^0.4.0"
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "voku/simple-mysqli",
+  "description": "Simple MySQLi library",
+  "keywords": [
+    "php",
+    "mysqli",
+    "simple db",
+    "DB"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/voku/simple-mysqli",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jonathan Tavares",
+      "email": "the.entomb@gmail.com",
+      "homepage": "https://github.com/entomb",
+      "role": "Developer"
+    },
+    {
+      "name": "Lars Moelleken",
+      "homepage": "http://www.moelleken.org/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "voku/simple-cache": "2.*",
+    "voku/portable-utf8": "1.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "satooshi/php-coveralls": "0.7.*@dev"
+  },
+  "autoload": {
+    "psr-0": {
+      "voku": "src"
+    }
+  }
+}
