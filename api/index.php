@@ -13,7 +13,7 @@ $app = new \Slim\Slim();
  * getting into API business logic
  */
 $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
-    "path" => "/test/basic-auth", /* or ["/admin", "/api"] */
+    "path" => array("/test/basic-auth", "/token"), /* or ["/admin", "/api"] */
     "secure" => false, /* SSL */
     "realm" => "Protected",
     "authenticator" => function ($arguments) use ($app) {
@@ -42,40 +42,76 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
 )));
 
 $app->add(new \Slim\Middleware\JwtAuthentication(array(
-    "path" => "/test/jwt-auth",
     "secure" => false,
     "secret" => "supersecretkeyyoushouldnotcommittogithub",
     "rules" => array(
         new \Slim\Middleware\JwtAuthentication\RequestPathRule(array(
             "path" => "/",
-            "passthrough" => array()
+            "passthrough" => array("/test/basic-auth", "/token", "/public")
         )),
         new \Slim\Middleware\JwtAuthentication\RequestMethodRule(array(
             "passthrough" => array("OPTIONS")
-        ))
-))));
+        ))),
+    "callback" => function ($options) use ($app) {
+        $app->jwt = $options["decoded"];
+    },
+    "error" => function ($arguments) use ($app) {
+        $response["status"] = "error";
+        $response["message"] = $arguments["message"];
+        $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
+    }
+)));
+
+// for getting token for JWT authentication, POST only
+$app->post('/token', function () use ($app) {
+    $key = "supersecretkeyyoushouldnotcommittogithub";
+    $token = array(
+        "iss" => "https://YOUR_NAMESPACE",
+        "sub" => $app->environment["PHP_AUTH_USER"],
+        "aud" => $app->environment["PHP_AUTH_USER"], // "YOUR_CLIENT_ID",
+        "exp" => strtotime('10 hour'),
+        "iat" => time());
+
+    // we are using firebase/php-jwt ~2.0 due to dependency of tuupola/slim-jwt-auth 0.4.0
+    // for php-jwt 3.0 we need a reference to namespace "use \Firebase\JWT\JWT;" 
+    $jwt = \JWT::encode($token, $key);
+
+    // example - eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvWU9VUl9OQU1FU1BBQ0UiLCJzdWIiOiJUZXN0aW5nMSIsImF1ZCI6IllPVVJfQ0xJRU5UX0lEIiwiZXhwIjoxNDM4NjI3NDM2LCJpYXQiOjE0Mzg1OTE0MzZ9.GroL5De0tEZTdwr6GfPsj5LCV5IioY0DGXbfZxL3CAM
+    // $decoded = \JWT::decode($jwt, $key, array('HS256'));
+
+    $response["token"] = $jwt;
+    echo '{"d": ' . json_encode($response) . '}';
+});
 
 /*
- * Testing Endpoint
+ * JWT Endpoint
  */
-$app->get('/test/basic-auth', function () {
+$app->map('/test', function () {
+    $response["status"] = "ok";
+    $response["auth"] = "nil";
+    echo '{"d": ' . json_encode($response) . '}';
+})->via('GET', 'POST');
+
+$app->map('/test/basic-auth', function () {
+    // Header ["Authorization"] = "Basic XXXXXXXXXX"
     $response["status"] = "ok";
     $response["auth"] = "basic";
     echo '{"d": ' . json_encode($response) . '}';
-});
+})->via('GET', 'POST');
 
-$app->get('/test/jwt-auth', function () {
+$app->map('/test/jwt-auth', function () {
+    // Header ["Authorization"] = "Bearer XXXXXXXXXX"
     $response["status"] = "ok";
     $response["auth"] = "jwt";
     echo '{"d": ' . json_encode($response) . '}';
-});
+})->via('GET', 'POST');
 
 /*
  * API Endpoint
  */
 $app->get('/return/weekly/:year/:month/:day', function ($year, $month, $day) {
 
-    // http://localhost:8080/return/weekly/2015/07/08
+    // example - http://localhost:8080/api/return/weekly/2015/07/08
     // $asof = new DateTime("$year-$month-$day");
 
     $db = dbConx();
