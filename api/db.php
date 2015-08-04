@@ -1,13 +1,12 @@
 <?php
+require 'vendor/autoload.php';
 
 // database connection config
-define('DB_HOST', 'aaa');
-define('DB_USER', 'bbb');
-define('DB_PASSWORD', 'ccc');
-define('DB_NAME', 'ddd');
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 
 function dbConx() {
-	return voku\db\DB::getInstance(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	return voku\db\DB::getInstance(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_NAME'));
 }
 
 ?>

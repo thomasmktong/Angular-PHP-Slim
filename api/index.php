@@ -6,6 +6,8 @@ require 'vendor/autoload.php';
  * RESTful API framework
  */
 $app = new \Slim\Slim();
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 
 /*
  * Authentication Logic
@@ -43,7 +45,7 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
 
 $app->add(new \Slim\Middleware\JwtAuthentication(array(
     "secure" => false,
-    "secret" => "supersecretkeyyoushouldnotcommittogithub",
+    "secret" => getenv('JWT_SECRET'),
     "rules" => array(
         new \Slim\Middleware\JwtAuthentication\RequestPathRule(array(
             "path" => "/",
@@ -64,9 +66,9 @@ $app->add(new \Slim\Middleware\JwtAuthentication(array(
 
 // for getting token for JWT authentication, POST only
 $app->post('/token', function () use ($app) {
-    $key = "supersecretkeyyoushouldnotcommittogithub";
+    $key = getenv('JWT_SECRET');
     $token = array(
-        "iss" => "https://YOUR_NAMESPACE",
+        "iss" => getenv('JWT_NAMESPACE'),
         "sub" => $app->environment["PHP_AUTH_USER"],
         "aud" => $app->environment["PHP_AUTH_USER"], // "YOUR_CLIENT_ID",
         "exp" => strtotime('10 hour'),
@@ -86,12 +88,6 @@ $app->post('/token', function () use ($app) {
 /*
  * JWT Endpoint
  */
-$app->map('/test', function () {
-    $response["status"] = "ok";
-    $response["auth"] = "nil";
-    echo '{"d": ' . json_encode($response) . '}';
-})->via('GET', 'POST');
-
 $app->map('/test/basic-auth', function () {
     // Header ["Authorization"] = "Basic XXXXXXXXXX"
     $response["status"] = "ok";

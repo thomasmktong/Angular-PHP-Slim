@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Slim\\Middleware\\' => array($vendorDir . '/tuupola/slim-basic-auth/src', $vendorDir . '/tuupola/slim-jwt-auth/src'),
+    'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
 );
