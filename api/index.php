@@ -14,13 +14,14 @@ $dotenv->load();
  * For all the "path" defined below, run the following Slim middleware before
  * getting into API business logic
  */
-$app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
-    "path" => array("/test/basic-auth", "/token"), /* or ["/admin", "/api"] */
+$basicAuthenticator = new \Slim\Middleware\HttpBasicAuthentication(array(
+    "path" => array("/test/basic-auth", "/token-auth"), /* or ["/admin", "/api"] */
     "secure" => false, /* SSL */
     "realm" => "Protected",
     "authenticator" => function ($arguments) use ($app) {
 
         $userName = addslashes($arguments["user"]);
+
         if(!empty($userName)) {
 
             $db = dbConx();
@@ -41,15 +42,15 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
         $response["message"] = $arguments["message"];
         $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
     }
-)));
+));
 
-$app->add(new \Slim\Middleware\JwtAuthentication(array(
+$jwtAuthenticator = new \Slim\Middleware\JwtAuthentication(array(
     "secure" => false,
     "secret" => getenv('JWT_SECRET'),
     "rules" => array(
         new \Slim\Middleware\JwtAuthentication\RequestPathRule(array(
             "path" => "/",
-            "passthrough" => array("/test/basic-auth", "/token", "/public")
+            "passthrough" => array("/test/basic-auth", "/token", "/token-auth", "/public")
         )),
         new \Slim\Middleware\JwtAuthentication\RequestMethodRule(array(
             "passthrough" => array("OPTIONS")
@@ -62,10 +63,15 @@ $app->add(new \Slim\Middleware\JwtAuthentication(array(
         $response["message"] = $arguments["message"];
         $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
     }
-)));
+));
+
+$app->add($basicAuthenticator);
+$app->add($jwtAuthenticator);
+$app->add(new \CorsSlim\CorsSlim(array("origin" => "*")));
 
 // for getting token for JWT authentication, POST only
-$app->post('/token', function () use ($app) {
+$app->post('/token-auth', function () use ($app) {
+
     $key = getenv('JWT_SECRET');
     $token = array(
         "iss" => getenv('JWT_NAMESPACE'),
@@ -78,11 +84,32 @@ $app->post('/token', function () use ($app) {
     // for php-jwt 3.0 we need a reference to namespace "use \Firebase\JWT\JWT;" 
     $jwt = \JWT::encode($token, $key);
 
-    // example - eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvWU9VUl9OQU1FU1BBQ0UiLCJzdWIiOiJUZXN0aW5nMSIsImF1ZCI6IllPVVJfQ0xJRU5UX0lEIiwiZXhwIjoxNDM4NjI3NDM2LCJpYXQiOjE0Mzg1OTE0MzZ9.GroL5De0tEZTdwr6GfPsj5LCV5IioY0DGXbfZxL3CAM
+    // example - eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvWU9VUl9OQU1FU1BBQ0UiLCJzdWIiOiJUZXN0aW5nMSIsImF1ZCI6IlRlc3RpbmcxIiwiZXhwIjoxNDM5MjA1NDQ3LCJpYXQiOjE0MzkxNjk0NDd9.RBeJ7pIeJPNGVeQ4ZkPWmSW6O0n6me8QemGrE0kHk0Q
     // $decoded = \JWT::decode($jwt, $key, array('HS256'));
 
     $response["token"] = $jwt;
-    echo '{"d": ' . json_encode($response) . '}';
+    echo json_encode($response);
+
+})->name('token-auth');
+
+$app->post('/token', function () use ($app, $basicAuthenticator) {
+
+    /*
+    $toAuth = array(
+        "user" => $app->request()->post('user'),
+        "password" => $app->request()->post('password'));
+    */
+
+    $json = $app->request->getBody();
+    $data = json_decode($json, true); // parse the JSON into an assoc. array
+
+    $callable = $basicAuthenticator->getAuthenticator();
+
+    if($callable($data)) {
+        $app->environment["PHP_AUTH_USER"] = $data["user"];
+        $route = $app->router()->getNamedRoute('token-auth');
+        $route->dispatch();
+    }
 });
 
 /*

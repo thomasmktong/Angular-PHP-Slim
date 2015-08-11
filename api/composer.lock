@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c83960f9bf9fef76877ea27cff2d8186",
+    "hash": "7ead9e9e8584fd8afb64f15c96d74b2f",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -91,6 +91,50 @@
                 "password"
             ],
             "time": "2014-11-20 16:49:30"
+        },
+        {
+            "name": "palanik/corsslim",
+            "version": "v0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/palanik/CorsSlim.git",
+                "reference": "e315799762352028e24735f14bebdf63f9135cc8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/palanik/CorsSlim/zipball/e315799762352028e24735f14bebdf63f9135cc8",
+                "reference": "e315799762352028e24735f14bebdf63f9135cc8",
+                "shasum": ""
+            },
+            "require": {
+                "slim/slim": ">=2.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CorsSlim\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "palanik"
+                }
+            ],
+            "description": "Cross-origin resource sharing (CORS) middleware for PHP Slim.",
+            "homepage": "https://github.com/palanik/CorsSlim",
+            "keywords": [
+                "cors",
+                "corsslim",
+                "cross-origin",
+                "preflight",
+                "slim",
+                "slimphp"
+            ],
+            "time": "2015-04-29 01:21:37"
         },
         {
             "name": "psr/log",
@@ -325,16 +369,16 @@
         },
         {
             "name": "voku/portable-utf8",
-            "version": "1.5.2",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/portable-utf8.git",
-                "reference": "04e36191940e326c984635ffdf7f0233049b67a3"
+                "reference": "9da4960092c9b0f51e1661a832296b6997813c73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/portable-utf8/zipball/04e36191940e326c984635ffdf7f0233049b67a3",
-                "reference": "04e36191940e326c984635ffdf7f0233049b67a3",
+                "url": "https://api.github.com/repos/voku/portable-utf8/zipball/9da4960092c9b0f51e1661a832296b6997813c73",
+                "reference": "9da4960092c9b0f51e1661a832296b6997813c73",
                 "shasum": ""
             },
             "require": {
@@ -350,11 +394,18 @@
                 "ext-mbstring": "Use Mbstring for best performance"
             },
             "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "voku": "src",
-                    "Normalizer": "src"
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
                 }
+            },
+            "autoload": {
+                "psr-4": {
+                    "voku\\": "src/voku/"
+                },
+                "classmap": [
+                    "src/Normalizer.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -368,6 +419,10 @@
                 {
                     "name": "Lars Moelleken",
                     "homepage": "http://www.moelleken.org/"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
                 }
             ],
             "description": "Portable UTF-8 library with polyfill / shim for Iconv, Intl, Mbstring, Normalizrer etc.",
@@ -380,20 +435,20 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-06-25 07:44:47"
+            "time": "2015-08-07 08:49:08"
         },
         {
             "name": "voku/simple-cache",
-            "version": "2.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/simple-cache.git",
-                "reference": "c4a117b03b5d182450087b89a37add2f011b50d5"
+                "reference": "551795af784d9aed00d6b0c523486e2d28922d78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/simple-cache/zipball/c4a117b03b5d182450087b89a37add2f011b50d5",
-                "reference": "c4a117b03b5d182450087b89a37add2f011b50d5",
+                "url": "https://api.github.com/repos/voku/simple-cache/zipball/551795af784d9aed00d6b0c523486e2d28922d78",
+                "reference": "551795af784d9aed00d6b0c523486e2d28922d78",
                 "shasum": ""
             },
             "require": {
@@ -405,9 +460,14 @@
                 "satooshi/php-coveralls": "0.7.*@dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "voku": "src"
+                "psr-4": {
+                    "voku\\cache\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -429,7 +489,7 @@
                 "php",
                 "simple cache"
             ],
-            "time": "2015-07-07 06:47:59"
+            "time": "2015-07-24 11:48:59"
         },
         {
             "name": "voku/simple-mysqli",

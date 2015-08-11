@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'voku\\cache\\' => array($vendorDir . '/voku/simple-cache/src'),
+    'voku\\' => array($vendorDir . '/voku/portable-utf8/src/voku'),
     'Slim\\Middleware\\' => array($vendorDir . '/tuupola/slim-basic-auth/src', $vendorDir . '/tuupola/slim-jwt-auth/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
+    'CorsSlim\\' => array($vendorDir . '/palanik/corsslim'),
 );

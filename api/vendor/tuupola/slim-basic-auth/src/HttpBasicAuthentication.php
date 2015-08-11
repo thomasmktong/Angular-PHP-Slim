@@ -73,6 +73,8 @@ class HttpBasicAuthentication extends \Slim\Middleware
 
     public function call()
     {
+
+
         $environment = $this->app->environment;
         $scheme = $environment["slim.url_scheme"];
         /* HTTP allowed only if secure is false or server is in relaxed array. */
@@ -85,6 +87,8 @@ class HttpBasicAuthentication extends \Slim\Middleware
                 throw new \RuntimeException($message);
             }
         }
+
+
 
         /* If rules say we should not authenticate call next and return. */
         if (false === $this->shouldAuthenticate()) {
@@ -105,6 +109,8 @@ class HttpBasicAuthentication extends \Slim\Middleware
             $user = $environment["PHP_AUTH_USER"];
             $password = $environment["PHP_AUTH_PW"];
         }
+
+
 
         $params = array("user" => $user, "password" => $password);
 
@@ -147,6 +153,7 @@ class HttpBasicAuthentication extends \Slim\Middleware
 
     private function shouldAuthenticate()
     {
+
         /* If any of the rules in stack return false will not authenticate */
         foreach ($this->rules as $callable) {
             if (false === $callable($this->app)) {

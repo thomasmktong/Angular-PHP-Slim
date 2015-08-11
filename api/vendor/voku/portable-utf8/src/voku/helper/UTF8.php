@@ -19,237 +19,229 @@ class UTF8
    * @var array
    */
   protected static $win1252ToUtf8 = array(
-      128 => "\xe2\x82\xac",
-      130 => "\xe2\x80\x9a",
-      131 => "\xc6\x92",
-      132 => "\xe2\x80\x9e",
-      133 => "\xe2\x80\xa6",
-      134 => "\xe2\x80\xa0",
-      135 => "\xe2\x80\xa1",
-      136 => "\xcb\x86",
-      137 => "\xe2\x80\xb0",
-      138 => "\xc5\xa0",
-      139 => "\xe2\x80\xb9",
-      140 => "\xc5\x92",
-      142 => "\xc5\xbd",
-      145 => "\xe2\x80\x98",
-      146 => "\xe2\x80\x99",
-      147 => "\xe2\x80\x9c",
-      148 => "\xe2\x80\x9d",
-      149 => "\xe2\x80\xa2",
-      150 => "\xe2\x80\x93",
-      151 => "\xe2\x80\x94",
-      152 => "\xcb\x9c",
-      153 => "\xe2\x84\xa2",
-      154 => "\xc5\xa1",
-      155 => "\xe2\x80\xba",
-      156 => "\xc5\x93",
-      158 => "\xc5\xbe",
-      159 => "\xc5\xb8",
+      128 => "\xe2\x82\xac", // EURO SIGN
+      130 => "\xe2\x80\x9a", // SINGLE LOW-9 QUOTATION MARK
+      131 => "\xc6\x92",     // LATIN SMALL LETTER F WITH HOOK
+      132 => "\xe2\x80\x9e", // DOUBLE LOW-9 QUOTATION MARK
+      133 => "\xe2\x80\xa6", // HORIZONTAL ELLIPSIS
+      134 => "\xe2\x80\xa0", // DAGGER
+      135 => "\xe2\x80\xa1", // DOUBLE DAGGER
+      136 => "\xcb\x86",     // MODIFIER LETTER CIRCUMFLEX ACCENT
+      137 => "\xe2\x80\xb0", // PER MILLE SIGN
+      138 => "\xc5\xa0",     // LATIN CAPITAL LETTER S WITH CARON
+      139 => "\xe2\x80\xb9", // SINGLE LEFT-POINTING ANGLE QUOTE
+      140 => "\xc5\x92",     // LATIN CAPITAL LIGATURE OE
+      142 => "\xc5\xbd",     // LATIN CAPITAL LETTER Z WITH CARON
+      145 => "\xe2\x80\x98", // LEFT SINGLE QUOTATION MARK
+      146 => "\xe2\x80\x99", // RIGHT SINGLE QUOTATION MARK
+      147 => "\xe2\x80\x9c", // LEFT DOUBLE QUOTATION MARK
+      148 => "\xe2\x80\x9d", // RIGHT DOUBLE QUOTATION MARK
+      149 => "\xe2\x80\xa2", // BULLET
+      150 => "\xe2\x80\x93", // EN DASH
+      151 => "\xe2\x80\x94", // EM DASH
+      152 => "\xcb\x9c",     // SMALL TILDE
+      153 => "\xe2\x84\xa2", // TRADE MARK SIGN
+      154 => "\xc5\xa1",     // LATIN SMALL LETTER S WITH CARON
+      155 => "\xe2\x80\xba", // SINGLE RIGHT-POINTING ANGLE QUOTE
+      156 => "\xc5\x93",     // LATIN SMALL LIGATURE OE
+      158 => "\xc5\xbe",     // LATIN SMALL LETTER Z WITH CARON
+      159 => "\xc5\xb8",     // LATIN CAPITAL LETTER Y WITH DIAERESIS
   );
 
   /**
    * @var array
    */
-  protected static $cp1252 = array(
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-  );
-
-  /**
-   * @var array
-   */
-  protected static $utf8 = array(
-      '€',
-      '‚',
-      'ƒ',
-      '„',
-      '…',
-      '†',
-      '‡',
-      'ˆ',
-      '‰',
-      'Š',
-      '‹',
-      'Œ',
-      'Ž',
-      '‘',
-      '’',
-      '“',
-      '”',
-      '•',
-      '–',
-      '—',
-      '˜',
-      '™',
-      'š',
-      '›',
-      'œ',
-      'ž',
-      'Ÿ',
+  protected static $cp1252ToUtf8 = array(
+      '' => '€',
+      '' => '‚',
+      '' => 'ƒ',
+      '' => '„',
+      '' => '…',
+      '' => '†',
+      '' => '‡',
+      '' => 'ˆ',
+      '' => '‰',
+      '' => 'Š',
+      '' => '‹',
+      '' => 'Œ',
+      '' => 'Ž',
+      '' => '‘',
+      '' => '’',
+      '' => '“',
+      '' => '”',
+      '' => '•',
+      '' => '–',
+      '' => '—',
+      '' => '˜',
+      '' => '™',
+      '' => 'š',
+      '' => '›',
+      '' => 'œ',
+      '' => 'ž',
+      '' => 'Ÿ',
   );
 
   /**
    * @var array
    */
   protected static $commonCaseFold = array(
-      array(
-          'µ',
-          'ſ',
-          "\xCD\x85",
-          'ς',
-          "\xCF\x90",
-          "\xCF\x91",
-          "\xCF\x95",
-          "\xCF\x96",
-          "\xCF\xB0",
-          "\xCF\xB1",
-          "\xCF\xB5",
-          "\xE1\xBA\x9B",
-          "\xE1\xBE\xBE",
-      ),
-      array(
-          'μ',
-          's',
-          'ι',
-          'σ',
-          'β',
-          'θ',
-          'φ',
-          'π',
-          'κ',
-          'ρ',
-          'ε',
-          "\xE1\xB9\xA1",
-          'ι',
-      ),
+      'ſ'            => 's',
+      "\xCD\x85"     => 'ι',
+      'ς'            => 'σ',
+      "\xCF\x90"     => 'β',
+      "\xCF\x91"     => 'θ',
+      "\xCF\x95"     => 'φ',
+      "\xCF\x96"     => 'π',
+      "\xCF\xB0"     => 'κ',
+      "\xCF\xB1"     => 'ρ',
+      "\xCF\xB5"     => 'ε',
+      "\xE1\xBA\x9B" => "\xE1\xB9\xA1",
+      "\xE1\xBE\xBE" => 'ι',
   );
 
   /**
    * @var array
    */
   protected static $brokenUtf8ToUtf8 = array(
-      "\xc2\x80" => "\xe2\x82\xac",
-      "\xc2\x82" => "\xe2\x80\x9a",
-      "\xc2\x83" => "\xc6\x92",
-      "\xc2\x84" => "\xe2\x80\x9e",
-      "\xc2\x85" => "\xe2\x80\xa6",
-      "\xc2\x86" => "\xe2\x80\xa0",
-      "\xc2\x87" => "\xe2\x80\xa1",
-      "\xc2\x88" => "\xcb\x86",
-      "\xc2\x89" => "\xe2\x80\xb0",
-      "\xc2\x8a" => "\xc5\xa0",
-      "\xc2\x8b" => "\xe2\x80\xb9",
-      "\xc2\x8c" => "\xc5\x92",
-      "\xc2\x8e" => "\xc5\xbd",
-      "\xc2\x91" => "\xe2\x80\x98",
-      "\xc2\x92" => "\xe2\x80\x99",
-      "\xc2\x93" => "\xe2\x80\x9c",
-      "\xc2\x94" => "\xe2\x80\x9d",
-      "\xc2\x95" => "\xe2\x80\xa2",
-      "\xc2\x96" => "\xe2\x80\x93",
-      "\xc2\x97" => "\xe2\x80\x94",
-      "\xc2\x98" => "\xcb\x9c",
-      "\xc2\x99" => "\xe2\x84\xa2",
-      "\xc2\x9a" => "\xc5\xa1",
-      "\xc2\x9b" => "\xe2\x80\xba",
-      "\xc2\x9c" => "\xc5\x93",
-      "\xc2\x9e" => "\xc5\xbe",
-      "\xc2\x9f" => "\xc5\xb8",
+      "\xc2\x80" => "\xe2\x82\xac", // EURO SIGN
+      "\xc2\x82" => "\xe2\x80\x9a", // SINGLE LOW-9 QUOTATION MARK
+      "\xc2\x83" => "\xc6\x92",     // LATIN SMALL LETTER F WITH HOOK
+      "\xc2\x84" => "\xe2\x80\x9e", // DOUBLE LOW-9 QUOTATION MARK
+      "\xc2\x85" => "\xe2\x80\xa6", // HORIZONTAL ELLIPSIS
+      "\xc2\x86" => "\xe2\x80\xa0", // DAGGER
+      "\xc2\x87" => "\xe2\x80\xa1", // DOUBLE DAGGER
+      "\xc2\x88" => "\xcb\x86",     // MODIFIER LETTER CIRCUMFLEX ACCENT
+      "\xc2\x89" => "\xe2\x80\xb0", // PER MILLE SIGN
+      "\xc2\x8a" => "\xc5\xa0",     // LATIN CAPITAL LETTER S WITH CARON
+      "\xc2\x8b" => "\xe2\x80\xb9", // SINGLE LEFT-POINTING ANGLE QUOTE
+      "\xc2\x8c" => "\xc5\x92",     // LATIN CAPITAL LIGATURE OE
+      "\xc2\x8e" => "\xc5\xbd",     // LATIN CAPITAL LETTER Z WITH CARON
+      "\xc2\x91" => "\xe2\x80\x98", // LEFT SINGLE QUOTATION MARK
+      "\xc2\x92" => "\xe2\x80\x99", // RIGHT SINGLE QUOTATION MARK
+      "\xc2\x93" => "\xe2\x80\x9c", // LEFT DOUBLE QUOTATION MARK
+      "\xc2\x94" => "\xe2\x80\x9d", // RIGHT DOUBLE QUOTATION MARK
+      "\xc2\x95" => "\xe2\x80\xa2", // BULLET
+      "\xc2\x96" => "\xe2\x80\x93", // EN DASH
+      "\xc2\x97" => "\xe2\x80\x94", // EM DASH
+      "\xc2\x98" => "\xcb\x9c",     // SMALL TILDE
+      "\xc2\x99" => "\xe2\x84\xa2", // TRADE MARK SIGN
+      "\xc2\x9a" => "\xc5\xa1",     // LATIN SMALL LETTER S WITH CARON
+      "\xc2\x9b" => "\xe2\x80\xba", // SINGLE RIGHT-POINTING ANGLE QUOTE
+      "\xc2\x9c" => "\xc5\x93",     // LATIN SMALL LIGATURE OE
+      "\xc2\x9e" => "\xc5\xbe",     // LATIN SMALL LETTER Z WITH CARON
+      "\xc2\x9f" => "\xc5\xb8",     // LATIN CAPITAL LETTER Y WITH DIAERESIS
+      'Ã¼'       => 'ü',
+      'Ã¤'       => 'ä',
+      'Ã¶'       => 'ö',
+      'Ã–'       => 'Ö',
+      'ÃŸ'       => 'ß',
+      'Ã '       => 'à',
+      'Ã¡'       => 'á',
+      'Ã¢'       => 'â',
+      'Ã£'       => 'ã',
+      'Ã¹'       => 'ù',
+      'Ãº'       => 'ú',
+      'Ã»'       => 'û',
+      'Ã™'       => 'Ù',
+      'Ãš'       => 'Ú',
+      'Ã›'       => 'Û',
+      'Ãœ'       => 'Ü',
+      'Ã²'       => 'ò',
+      'Ã³'       => 'ó',
+      'Ã´'       => 'ô',
+      'Ã¨'       => 'è',
+      'Ã©'       => 'é',
+      'Ãª'       => 'ê',
+      'Ã«'       => 'ë',
+      'Ã€'       => 'À',
+      'Ã'       => 'Á',
+      'Ã‚'       => 'Â',
+      'Ãƒ'       => 'Ã',
+      'Ã„'       => 'Ä',
+      'Ã…'       => 'Å',
+      'Ã‡'       => 'Ç',
+      'Ãˆ'       => 'È',
+      'Ã‰'       => 'É',
+      'ÃŠ'       => 'Ê',
+      'Ã‹'       => 'Ë',
+      'ÃŒ'       => 'Ì',
+      'Ã'       => 'Í',
+      'ÃŽ'       => 'Î',
+      'Ã'       => 'Ï',
+      'Ã‘'       => 'Ñ',
+      'Ã’'       => 'Ò',
+      'Ã“'       => 'Ó',
+      'Ã”'       => 'Ô',
+      'Ã•'       => 'Õ',
+      'Ã˜'       => 'Ø',
+      'Ã¥'       => 'å',
+      'Ã¦'       => 'æ',
+      'Ã§'       => 'ç',
+      'Ã¬'       => 'ì',
+      'Ã­'       => 'í',
+      'Ã®'       => 'î',
+      'Ã¯'       => 'ï',
+      'Ã°'       => 'ð',
+      'Ã±'       => 'ñ',
+      'Ãµ'       => 'õ',
+      'Ã¸'       => 'ø',
+      'Ã½'       => 'ý',
+      'Ã¿'       => 'ÿ',
+      'â‚¬'      => '€',
   );
 
   /**
    * @var array
    */
   protected static $utf8ToWin1252 = array(
-      "\xe2\x82\xac" => "\x80",
-      "\xe2\x80\x9a" => "\x82",
-      "\xc6\x92"     => "\x83",
-      "\xe2\x80\x9e" => "\x84",
-      "\xe2\x80\xa6" => "\x85",
-      "\xe2\x80\xa0" => "\x86",
-      "\xe2\x80\xa1" => "\x87",
-      "\xcb\x86"     => "\x88",
-      "\xe2\x80\xb0" => "\x89",
-      "\xc5\xa0"     => "\x8a",
-      "\xe2\x80\xb9" => "\x8b",
-      "\xc5\x92"     => "\x8c",
-      "\xc5\xbd"     => "\x8e",
-      "\xe2\x80\x98" => "\x91",
-      "\xe2\x80\x99" => "\x92",
-      "\xe2\x80\x9c" => "\x93",
-      "\xe2\x80\x9d" => "\x94",
-      "\xe2\x80\xa2" => "\x95",
-      "\xe2\x80\x93" => "\x96",
-      "\xe2\x80\x94" => "\x97",
-      "\xcb\x9c"     => "\x98",
-      "\xe2\x84\xa2" => "\x99",
-      "\xc5\xa1"     => "\x9a",
-      "\xe2\x80\xba" => "\x9b",
-      "\xc5\x93"     => "\x9c",
-      "\xc5\xbe"     => "\x9e",
-      "\xc5\xb8"     => "\x9f",
+      "\xe2\x82\xac" => "\x80", // EURO SIGN
+      "\xe2\x80\x9a" => "\x82", // SINGLE LOW-9 QUOTATION MARK
+      "\xc6\x92"     => "\x83", // LATIN SMALL LETTER F WITH HOOK
+      "\xe2\x80\x9e" => "\x84", // DOUBLE LOW-9 QUOTATION MARK
+      "\xe2\x80\xa6" => "\x85", // HORIZONTAL ELLIPSIS
+      "\xe2\x80\xa0" => "\x86", // DAGGER
+      "\xe2\x80\xa1" => "\x87", // DOUBLE DAGGER
+      "\xcb\x86"     => "\x88", // MODIFIER LETTER CIRCUMFLEX ACCENT
+      "\xe2\x80\xb0" => "\x89", // PER MILLE SIGN
+      "\xc5\xa0"     => "\x8a", // LATIN CAPITAL LETTER S WITH CARON
+      "\xe2\x80\xb9" => "\x8b", // SINGLE LEFT-POINTING ANGLE QUOTE
+      "\xc5\x92"     => "\x8c", // LATIN CAPITAL LIGATURE OE
+      "\xc5\xbd"     => "\x8e", // LATIN CAPITAL LETTER Z WITH CARON
+      "\xe2\x80\x98" => "\x91", // LEFT SINGLE QUOTATION MARK
+      "\xe2\x80\x99" => "\x92", // RIGHT SINGLE QUOTATION MARK
+      "\xe2\x80\x9c" => "\x93", // LEFT DOUBLE QUOTATION MARK
+      "\xe2\x80\x9d" => "\x94", // RIGHT DOUBLE QUOTATION MARK
+      "\xe2\x80\xa2" => "\x95", // BULLET
+      "\xe2\x80\x93" => "\x96", // EN DASH
+      "\xe2\x80\x94" => "\x97", // EM DASH
+      "\xcb\x9c"     => "\x98", // SMALL TILDE
+      "\xe2\x84\xa2" => "\x99", // TRADE MARK SIGN
+      "\xc5\xa1"     => "\x9a", // LATIN SMALL LETTER S WITH CARON
+      "\xe2\x80\xba" => "\x9b", // SINGLE RIGHT-POINTING ANGLE QUOTE
+      "\xc5\x93"     => "\x9c", // LATIN SMALL LIGATURE OE
+      "\xc5\xbe"     => "\x9e", // LATIN SMALL LETTER Z WITH CARON
+      "\xc5\xb8"     => "\x9f", // LATIN CAPITAL LETTER Y WITH DIAERESIS
   );
 
   /**
    * @var array
    */
   protected static $utf8MSWord = array(
-      "\xC2\xAB"     => '"',
-      // « (U+00AB) in UTF-8
-      "\xC2\xBB"     => '"',
-      // » (U+00BB) in UTF-8
-      "\xE2\x80\x98" => "'",
-      // ‘ (U+2018) in UTF-8
-      "\xE2\x80\x99" => "'",
-      // ’ (U+2019) in UTF-8
-      "\xE2\x80\x9A" => "'",
-      // ‚ (U+201A) in UTF-8
-      "\xE2\x80\x9B" => "'",
-      // ‛ (U+201B) in UTF-8
-      "\xE2\x80\x9C" => '"',
-      // “ (U+201C) in UTF-8
-      "\xE2\x80\x9D" => '"',
-      // ” (U+201D) in UTF-8
-      "\xE2\x80\x9E" => '"',
-      // „ (U+201E) in UTF-8
-      "\xE2\x80\x9F" => '"',
-      // ‟ (U+201F) in UTF-8
-      "\xE2\x80\xB9" => "'",
-      // ‹ (U+2039) in UTF-8
-      "\xE2\x80\xBA" => "'",
-      // › (U+203A) in UTF-8
-      "\xE2\x80\x93" => "-",
-      // – (U+2013) in UTF-8
-      "\xE2\x80\x94" => "-",
-      // — (U+2014) in UTF-8
-      "\xE2\x80\xA6" => "..."
-      // … (U+2026) in UTF-8
+      "\xc2\xab"     => '"',  // « (U+00AB) in UTF-8
+      "\xc2\xbb"     => '"',  // » (U+00BB) in UTF-8
+      "\xe2\x80\x98" => "'",  // ‘ (U+2018) in UTF-8
+      "\xe2\x80\x99" => "'",  // ’ (U+2019) in UTF-8
+      "\xe2\x80\x9a" => "'",  // ‚ (U+201A) in UTF-8
+      "\xe2\x80\x9b" => "'",  // ‛ (U+201B) in UTF-8
+      "\xe2\x80\x9c" => '"',  // “ (U+201C) in UTF-8
+      "\xe2\x80\x9d" => '"',  // ” (U+201D) in UTF-8
+      "\xe2\x80\x9e" => '"',  // „ (U+201E) in UTF-8
+      "\xe2\x80\x9f" => '"',  // ‟ (U+201F) in UTF-8
+      "\xe2\x80\xb9" => "'",  // ‹ (U+2039) in UTF-8
+      "\xe2\x80\xba" => "'",  // › (U+203A) in UTF-8
+      "\xe2\x80\x93" => "-",  // – (U+2013) in UTF-8
+      "\xe2\x80\x94" => "-",  // — (U+2014) in UTF-8
+      "\xe2\x80\xa6" => "..." // … (U+2026) in UTF-8
   );
 
   /**
@@ -353,6 +345,8 @@ class UTF8
    */
   public static function to_ascii($s, $subst_chr = '?')
   {
+    $s = (string)$s;
+
     if (!isset($s[0])) {
       return '';
     }
@@ -652,6 +646,8 @@ class UTF8
   public static function str_transliterate($str, $unknown = '?')
   {
     static $UTF8_TO_ASCII;
+
+    $str = (string)$str;
 
     if (!isset($str[0])) {
       return '';
@@ -1000,6 +996,8 @@ class UTF8
    */
   public static function is_utf8($str)
   {
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return true;
     }
@@ -1161,6 +1159,8 @@ class UTF8
   {
     static $bug62759;
 
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return '';
     }
@@ -1223,6 +1223,8 @@ class UTF8
    */
   public static function strlen($string, $encoding = 'UTF-8', $cleanUtf8 = false)
   {
+    $string = (string)$string;
+
     if (!isset($string[0])) {
       return 0;
     }
@@ -1250,6 +1252,8 @@ class UTF8
    */
   public static function split($str, $split_length = 1, $cleanUtf8 = false)
   {
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return array();
     }
@@ -1266,7 +1270,9 @@ class UTF8
       }
 
       preg_match_all('/./us', $str, $retArray);
-      $ret = $retArray[0];
+      if (isset($retArray[0])) {
+        $ret = $retArray[0];
+      }
       unset($retArray);
 
     } else {
@@ -1316,14 +1322,22 @@ class UTF8
   /**
    * rxClass
    *
-   * @param        string $s
-   * @param string        $class
+   * @param string $s
+   * @param string $class
    *
    * @return string
    */
   protected static function rxClass($s, $class = '')
   {
+    static $rxClassCache = array();
+    $cacheKey = $s . $class;
+
+    if (isset($rxClassCache[$cacheKey])) {
+      return $rxClassCache[$cacheKey];
+    }
+
     $class = array($class);
+
     foreach (self::str_split($s) as $s) {
       if ('-' === $s) {
         $class[0] = '-' . $class[0];
@@ -1335,12 +1349,18 @@ class UTF8
         $class[] = $s;
       }
     }
+
     $class[0] = '[' . $class[0] . ']';
+
     if (1 === count($class)) {
-      return $class[0];
+      $return = $class[0];
     } else {
-      return '(?:' . implode('|', $class) . ')';
+      $return = '(?:' . implode('|', $class) . ')';
     }
+
+    $rxClassCache[$cacheKey] = $return;
+
+    return $return;
   }
 
   /**
@@ -1515,21 +1535,21 @@ class UTF8
    * Unicode transformation for caseless matching
    * see http://unicode.org/reports/tr21/tr21-5.html
    *
-   * @param      string $s
-   * @param bool        $full
+   * @param string $string
+   * @param bool   $full
    *
    * @return string
    */
-  public static function strtocasefold($s, $full = true)
+  public static function strtocasefold($string, $full = true)
   {
-    $s = str_replace(self::$commonCaseFold[0], self::$commonCaseFold[1], $s);
+    $string = strtr($string, self::$commonCaseFold);
     if ($full) {
       static $fullCaseFold = false;
       $fullCaseFold || $fullCaseFold = self::getData('caseFolding_full');
-      $s = str_replace($fullCaseFold[0], $fullCaseFold[1], $s);
+      $string = str_replace($fullCaseFold[0], $fullCaseFold[1], $string);
     }
 
-    return self::strtolower($s);
+    return self::strtolower($string);
   }
 
   /**
@@ -1546,6 +1566,8 @@ class UTF8
    */
   public static function strtolower($str)
   {
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return '';
     }
@@ -1561,11 +1583,12 @@ class UTF8
    *
    * @since 1.0.4
    *
-   * @param string $string
+   * @param string    $string
+   * @param bool|true $useJsonDecode WARNING: use this only if there is not real-JSON in the string
    *
    * @return string
    */
-  public static function urldecode($string)
+  public static function urldecode($string, $useJsonDecode = true)
   {
     if (!$string) {
       return $string;
@@ -1573,19 +1596,28 @@ class UTF8
 
     $string = preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($string));
 
+    $flags = Bootup::is_php('5.4') ? ENT_QUOTES | ENT_HTML5 : ENT_QUOTES;
+
     $string = self::fix_simple_utf8(
         rawurldecode(
             self::html_entity_decode(
-                self::toUTF8($string)
+                self::to_utf8($string),
+                $flags
             )
         )
     );
 
-    if (strpos($string, "\\u") !== false && self::isJson($string) === false) {
+    if (
+        $useJsonDecode === true
+        &&
+        $string
+        &&
+        strpos($string, "\\u") !== false
+    ) {
       $string = json_decode('"' . $string . '"');
     }
 
-    return $string;
+    return (string)$string;
   }
 
   /**
@@ -1597,82 +1629,13 @@ class UTF8
    */
   public static function fix_simple_utf8($str)
   {
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return '';
     }
 
-    $chars = self::get_broken_utf8_array();
-
-    return str_replace(array_keys($chars), $chars, $str);
-  }
-
-  /**
-   * get a array of broken utf-8 chars
-   *
-   * @return array
-   */
-  protected static function get_broken_utf8_array()
-  {
-    return array(
-        'Ã¼'  => 'ü',
-        'Ã¤'  => 'ä',
-        'Ã¶'  => 'ö',
-        'Ã–'  => 'Ö',
-        'ÃŸ'  => 'ß',
-        'Ã '  => 'à',
-        'Ã¡'  => 'á',
-        'Ã¢'  => 'â',
-        'Ã£'  => 'ã',
-        'Ã¹'  => 'ù',
-        'Ãº'  => 'ú',
-        'Ã»'  => 'û',
-        'Ã™'  => 'Ù',
-        'Ãš'  => 'Ú',
-        'Ã›'  => 'Û',
-        'Ãœ'  => 'Ü',
-        'Ã²'  => 'ò',
-        'Ã³'  => 'ó',
-        'Ã´'  => 'ô',
-        'Ã¨'  => 'è',
-        'Ã©'  => 'é',
-        'Ãª'  => 'ê',
-        'Ã«'  => 'ë',
-        'Ã€'  => 'À',
-        'Ã'  => 'Á',
-        'Ã‚'  => 'Â',
-        'Ãƒ'  => 'Ã',
-        'Ã„'  => 'Ä',
-        'Ã…'  => 'Å',
-        'Ã‡'  => 'Ç',
-        'Ãˆ'  => 'È',
-        'Ã‰'  => 'É',
-        'ÃŠ'  => 'Ê',
-        'Ã‹'  => 'Ë',
-        'ÃŒ'  => 'Ì',
-        'Ã'  => 'Í',
-        'ÃŽ'  => 'Î',
-        'Ã'  => 'Ï',
-        'Ã‘'  => 'Ñ',
-        'Ã’'  => 'Ò',
-        'Ã“'  => 'Ó',
-        'Ã”'  => 'Ô',
-        'Ã•'  => 'Õ',
-        'Ã˜'  => 'Ø',
-        'Ã¥'  => 'å',
-        'Ã¦'  => 'æ',
-        'Ã§'  => 'ç',
-        'Ã¬'  => 'ì',
-        'Ã­'  => 'í',
-        'Ã®'  => 'î',
-        'Ã¯'  => 'ï',
-        'Ã°'  => 'ð',
-        'Ã±'  => 'ñ',
-        'Ãµ'  => 'õ',
-        'Ã¸'  => 'ø',
-        'Ã½'  => 'ý',
-        'Ã¿'  => 'ÿ',
-        'â‚¬' => '€',
-    );
+    return strtr($str, self::$brokenUtf8ToUtf8);
   }
 
   /**
@@ -1747,6 +1710,8 @@ class UTF8
    */
   public static function html_entity_decode($string, $flags = null, $encoding = 'UTF-8')
   {
+    $string = (string)$string;
+
     if (!isset($string[0])) {
       return '';
     }
@@ -1774,18 +1739,6 @@ class UTF8
   }
 
   /**
-   * alias for "UTF8::to_utf8"
-   *
-   * @param string $text
-   *
-   * @return string
-   */
-  public static function toUTF8($text)
-  {
-    return self::to_utf8($text);
-  }
-
-  /**
    * Function UTF8::to_utf8
    *
    * This function leaves UTF8 characters alone, while converting almost all non-UTF8 to UTF8.
@@ -1806,7 +1759,7 @@ class UTF8
    *
    * @name               to_utf8
    *
-   * @param string       $text Any string.
+   * @param string|array $text Any string or array.
    *
    * @return string The same string, UTF8 encoded
    *
@@ -1821,11 +1774,9 @@ class UTF8
       return $text;
     }
 
-    if (!isset($text[0])) {
-      return $text;
-    }
+    $text = (string)$text;
 
-    if (!is_string($text)) {
+    if (!isset($text[0])) {
       return $text;
     }
 
@@ -1834,50 +1785,62 @@ class UTF8
     $buf = '';
     for ($i = 0; $i < $max; $i++) {
       $c1 = $text{$i};
-      if ($c1 >= "\xc0") { //Should be converted to UTF8, if it's not UTF8 already
+
+      if ($c1 >= "\xc0") { // should be converted to UTF8, if it's not UTF8 already
         $c2 = $i + 1 >= $max ? "\x00" : $text{$i + 1};
         $c3 = $i + 2 >= $max ? "\x00" : $text{$i + 2};
         $c4 = $i + 3 >= $max ? "\x00" : $text{$i + 3};
-        if ($c1 >= "\xc0" & $c1 <= "\xdf") { //looks like 2 bytes UTF8
-          if ($c2 >= "\x80" && $c2 <= "\xbf") { //yeah, almost sure it's UTF8 already
+
+        if ($c1 >= "\xc0" & $c1 <= "\xdf") { // looks like 2 bytes UTF8
+
+          if ($c2 >= "\x80" && $c2 <= "\xbf") { // yeah, almost sure it's UTF8 already
             $buf .= $c1 . $c2;
             $i++;
-          } else { //not valid UTF8.  Convert it.
+          } else { // not valid UTF8 - convert it
             $cc1 = (chr(ord($c1) / 64) | "\xc0");
             $cc2 = ($c1 & "\x3f") | "\x80";
             $buf .= $cc1 . $cc2;
           }
-        } elseif ($c1 >= "\xe0" & $c1 <= "\xef") { //looks like 3 bytes UTF8
-          if ($c2 >= "\x80" && $c2 <= "\xbf" && $c3 >= "\x80" && $c3 <= "\xbf") { //yeah, almost sure it's UTF8 already
+
+        } elseif ($c1 >= "\xe0" & $c1 <= "\xef") { // looks like 3 bytes UTF8
+
+          if ($c2 >= "\x80" && $c2 <= "\xbf" && $c3 >= "\x80" && $c3 <= "\xbf") { // yeah, almost sure it's UTF8 already
             $buf .= $c1 . $c2 . $c3;
             $i += 2;
-          } else { //not valid UTF8.  Convert it.
+          } else { // not valid UTF8 - convert it
             $cc1 = (chr(ord($c1) / 64) | "\xc0");
             $cc2 = ($c1 & "\x3f") | "\x80";
             $buf .= $cc1 . $cc2;
           }
-        } elseif ($c1 >= "\xf0" & $c1 <= "\xf7") { //looks like 4 bytes UTF8
-          if ($c2 >= "\x80" && $c2 <= "\xbf" && $c3 >= "\x80" && $c3 <= "\xbf" && $c4 >= "\x80" && $c4 <= "\xbf") { //yeah, almost sure it's UTF8 already
+
+        } elseif ($c1 >= "\xf0" & $c1 <= "\xf7") { // looks like 4 bytes UTF8
+
+          if ($c2 >= "\x80" && $c2 <= "\xbf" && $c3 >= "\x80" && $c3 <= "\xbf" && $c4 >= "\x80" && $c4 <= "\xbf") { // yeah, almost sure it's UTF8 already
             $buf .= $c1 . $c2 . $c3 . $c4;
             $i += 3;
-          } else { //not valid UTF8.  Convert it.
+          } else { // not valid UTF8 - convert it
             $cc1 = (chr(ord($c1) / 64) | "\xc0");
             $cc2 = ($c1 & "\x3f") | "\x80";
             $buf .= $cc1 . $cc2;
           }
-        } else { //doesn't look like UTF8, but should be converted
+
+        } else { // doesn't look like UTF8, but should be converted
           $cc1 = (chr(ord($c1) / 64) | "\xc0");
           $cc2 = (($c1 & "\x3f") | "\x80");
           $buf .= $cc1 . $cc2;
         }
+
       } elseif (($c1 & "\xc0") == "\x80") { // needs conversion
-        if (isset(self::$win1252ToUtf8[ord($c1)])) { //found in Windows-1252 special cases
-          $buf .= self::$win1252ToUtf8[ord($c1)];
+
+        $ordC1 = ord($c1);
+        if (isset(self::$win1252ToUtf8[$ordC1])) { // found in Windows-1252 special cases
+          $buf .= self::$win1252ToUtf8[$ordC1];
         } else {
-          $cc1 = (chr(ord($c1) / 64) | "\xc0");
+          $cc1 = (chr($ordC1 / 64) | "\xc0");
           $cc2 = (($c1 & "\x3f") | "\x80");
           $buf .= $cc1 . $cc2;
         }
+
       } else { // it doesn't need conversion
         $buf .= $c1;
       }
@@ -1887,17 +1850,27 @@ class UTF8
   }
 
   /**
+   * alias for "UTF8::to_utf8"
+   *
+   * @param string $text
+   *
+   * @return string
+   */
+  public static function toUTF8($text)
+  {
+    return self::to_utf8($text);
+  }
+
+  /**
    * @param $string
    *
    * @return bool
    */
   public static function isJson($string)
   {
-    if (!isset($string[0])) {
-      return false;
-    }
+    $string = (string)$string;
 
-    if (!is_string($string)) {
+    if (!isset($string[0])) {
       return false;
     }
 
@@ -1907,9 +1880,9 @@ class UTF8
         json_last_error() == JSON_ERROR_NONE
     ) {
       return true;
+    } else {
+      return false;
     }
-
-    return false;
   }
 
   /**
@@ -2294,6 +2267,8 @@ class UTF8
    */
   public static function cleanup($text)
   {
+    $text = (string)$text;
+
     if (!isset($text[0])) {
       return '';
     }
@@ -2327,8 +2302,7 @@ class UTF8
       $fp = fopen($file, 'r');
       $block = fread($fp, 512);
       fclose($fp);
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       $block = "";
     }
 
@@ -2574,29 +2548,23 @@ class UTF8
   /**
    * utf8 - decode
    *
-   * @param string $text
+   * @param string $string
    *
    * @return string
    */
-  public static function utf8_decode($text)
+  public static function utf8_decode($string)
   {
-    if (!isset($text[0])) {
+    $string = (string)$string;
+
+    if (!isset($string[0])) {
       return '';
     }
 
     // init
     self::checkForSupport();
-    $text = self::to_utf8($text);
+    $string = self::to_utf8($string);
 
-    $o = Xml::utf8_decode(
-        str_replace(
-            array_keys(self::$utf8ToWin1252),
-            array_values(self::$utf8ToWin1252),
-            $text
-        )
-    );
-
-    return $o;
+    return Xml::utf8_decode(strtr($string, self::$utf8ToWin1252));
   }
 
   /**
@@ -2623,18 +2591,18 @@ class UTF8
   /**
    * utf8_encode
    *
-   * @param string $s
+   * @param string $string
    *
    * @return string
    */
-  public static function utf8_encode($s)
+  public static function utf8_encode($string)
   {
-    $s = utf8_encode($s);
+    $string = utf8_encode($string);
 
-    if (false === strpos($s, "\xC2")) {
-      return $s;
+    if (false === strpos($string, "\xC2")) {
+      return $string;
     } else {
-      return str_replace(self::$cp1252, self::$utf8, $s);
+      return strtr($string, self::$cp1252ToUtf8);
     }
   }
 
@@ -2784,6 +2752,11 @@ class UTF8
 
   /**
    * generates an array of byte length of each character of a Unicode string.
+   *
+   * 1 byte => U+0000  - U+007F
+   * 2 byte => U+0080  - U+07FF
+   * 3 byte => U+0800  - U+FFFF
+   * 4 byte => U+10000 - U+10FFFF
    *
    * @param    string $str The original Unicode string
    *
@@ -3048,8 +3021,11 @@ class UTF8
    * haystack string. If
    * needle is not found, it returns false.
    */
-  public static function strpos($haystack, $needle, $offset = null, $cleanUtf8 = false)
+  public static function strpos($haystack, $needle, $offset = 0, $cleanUtf8 = false)
   {
+    $haystack = (string)$haystack;
+    $needle = (string)$needle;
+
     if (!isset($haystack[0]) || !isset($needle[0])) {
       return false;
     }
@@ -3288,7 +3264,10 @@ class UTF8
   /**
    * strip whitespace or other characters from beginning or end of a UTF-8 string
    *
-   * WARNING: this is much slower then "trim()" !!!!
+   * INFO: this is slower then "trim()"
+   *
+   * But we can only use the original-function, if we use <= 7-Bit in the string / chars
+   * but the check for ACSII (7-Bit) cost more time, then we can safe here.
    *
    * @param    string $string The string to be trimmed
    * @param    string $chars  Optional characters to be stripped
@@ -3297,8 +3276,14 @@ class UTF8
    */
   public static function trim($string = '', $chars = INF)
   {
+    $string = (string)$string;
+
+    if (!isset($string[0])) {
+      return '';
+    }
+
+    // Info: http://nadeausoftware.com/articles/2007/9/php_tip_how_strip_punctuation_characters_web_page#Unicodecharactercategories
     if ($chars === INF || !$chars) {
-      // Info: http://nadeausoftware.com/articles/2007/9/php_tip_how_strip_punctuation_characters_web_page#Unicodecharactercategories
       return preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $string);
     }
 
@@ -3317,6 +3302,12 @@ class UTF8
    */
   public static function rtrim($string = '', $chars = INF)
   {
+    $string = (string)$string;
+
+    if (!isset($string[0])) {
+      return '';
+    }
+
     $chars = INF === $chars ? '\s' : self::rxClass($chars);
 
     return preg_replace("/{$chars}+$/u", '', $string);
@@ -3334,6 +3325,12 @@ class UTF8
    */
   public static function ltrim($string = '', $chars = INF)
   {
+    $string = (string)$string;
+
+    if (!isset($string[0])) {
+      return '';
+    }
+
     $chars = INF === $chars ? '\s' : self::rxClass($chars);
 
     return preg_replace("/^{$chars}+/u", '', $string);
@@ -3426,7 +3423,7 @@ class UTF8
    */
   public static function isAscii($str)
   {
-    return self::isAscii($str);
+    return self::is_ascii($str);
   }
 
   /**
@@ -3702,6 +3699,31 @@ class UTF8
   }
 
   /**
+   * Repeat a string
+   *
+   * @param string $input      <p>
+   *                           The string to be repeated.
+   *                           </p>
+   * @param int    $multiplier <p>
+   *                           Number of time the input string should be
+   *                           repeated.
+   *                           </p>
+   *                           <p>
+   *                           multiplier has to be greater than or equal to 0.
+   *                           If the multiplier is set to 0, the function
+   *                           will return an empty string.
+   *                           </p>
+   *
+   * @return string the repeated string.
+   */
+  public static function str_repeat($input, $multiplier)
+  {
+    $input = self::filter($input);
+
+    return str_repeat($input, $multiplier);
+  }
+
+  /**
    * removes duplicate occurrences of a string in another string
    *
    * @param    string       $str  The base string
@@ -3748,6 +3770,9 @@ class UTF8
    */
   public static function stripos($haystack, $needle, $offset = null, $cleanUtf8 = false)
   {
+    $haystack = (string)$haystack;
+    $needle = (string)$needle;
+
     if (!isset($haystack[0]) || !isset($needle[0])) {
       return false;
     }
@@ -3828,6 +3853,8 @@ class UTF8
    */
   public static function strtoupper($str)
   {
+    $str = (string)$str;
+
     if (!isset($str[0])) {
       return '';
     }
@@ -4991,16 +5018,34 @@ class UTF8
   }
 
   /**
-   * str_replace
-   *
    * INFO: this is only a wrapper for "str_replace()"  -> the original functions is already UTF-8 safe
    *
-   * @param      $search
-   * @param      $replace
-   * @param      $subject
-   * @param null $count
+   * (PHP 4, PHP 5)<br/>
+   * Replace all occurrences of the search string with the replacement string
    *
-   * @return mixed
+   * @link http://php.net/manual/en/function.str-replace.php
+   *
+   * @param mixed $search  <p>
+   *                       The value being searched for, otherwise known as the needle.
+   *                       An array may be used to designate multiple needles.
+   *                       </p>
+   * @param mixed $replace <p>
+   *                       The replacement value that replaces found search
+   *                       values. An array may be used to designate multiple replacements.
+   *                       </p>
+   * @param mixed $subject <p>
+   *                       The string or array being searched and replaced on,
+   *                       otherwise known as the haystack.
+   *                       </p>
+   *                       <p>
+   *                       If subject is an array, then the search and
+   *                       replace is performed with every entry of
+   *                       subject, and the return value is an array as
+   *                       well.
+   *                       </p>
+   * @param int   $count   [optional] If passed, this will hold the number of matched and replaced needles.
+   *
+   * @return mixed This function returns a string or an array with the replaced values.
    */
   public static function str_replace($search, $replace, $subject, &$count = null)
   {
@@ -5086,6 +5131,9 @@ class UTF8
    */
   public static function strrpos($haystack, $needle, $offset = null, $cleanUtf8 = false)
   {
+    $haystack = (string)$haystack;
+    $needle = (string)$needle;
+
     if (!isset($haystack[0]) || !isset($needle[0])) {
       return false;
     }
@@ -5169,13 +5217,15 @@ class UTF8
    * (ignoring Windows-1252 chars from 80 to 9F) use this function to fix it.
    * See: http://en.wikipedia.org/wiki/Windows-1252
    *
-   * @param   string $text
+   * @deprecated use "UTF8::fix_simple_utf8()"
+   *
+   * @param   string $string
    *
    * @return  string
    */
-  public static function utf8_fix_win1252_chars($text)
+  public static function utf8_fix_win1252_chars($string)
   {
-    return str_replace(array_keys(self::$brokenUtf8ToUtf8), array_values(self::$brokenUtf8ToUtf8), $text);
+    return self::fix_simple_utf8($string);
   }
 
   /**
@@ -5247,26 +5297,29 @@ class UTF8
   /**
    * Parses the string into variables
    *
+   * WARNING: This differs from parse_str() by returning the results
+   *    instead of placing them in the local scope!
+   *
    * @link http://php.net/manual/en/function.parse-str.php
    *
    * @param string $str     <p>
    *                        The input string.
    *                        </p>
-   * @param array  $arr     <p>
+   * @param array  $result  <p>
    *                        If the second parameter arr is present,
    *                        variables are stored in this variable as array elements instead.
    *                        </p>
    *
    * @return void
    */
-  public static function parse_str($str, &$arr)
+  public static function parse_str($str, &$result)
   {
     // init
     self::checkForSupport();
 
     $str = self::filter($str);
 
-    mb_parse_str($str, $arr);
+    mb_parse_str($str, $result);
   }
 
   /**

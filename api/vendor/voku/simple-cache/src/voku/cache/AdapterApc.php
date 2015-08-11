@@ -12,20 +12,23 @@ namespace voku\cache;
 class AdapterApc implements iAdapter
 {
 
+  /**
+   * @var bool
+   */
   public $installed = false;
+
+  /**
+   * @var bool
+   */
   public $debug = false;
 
   /**
    * __construct()
    */
-  function __construct()
+  public function __construct()
   {
-    if (function_exists('apc_store') === false) {
-      return false;
-    } else {
+    if (function_exists('apc_store') === true) {
       $this->installed = true;
-
-      return true;
     }
   }
 
