@@ -1,5 +1,6 @@
 <?php
 require_once 'db.php';
+require_once 'util.php';
 require 'vendor/autoload.php';
 
 /*
@@ -67,7 +68,7 @@ $jwtAuthenticator = new \Slim\Middleware\JwtAuthentication(array(
 
 $app->add($basicAuthenticator);
 $app->add($jwtAuthenticator);
-$app->add(new \CorsSlim\CorsSlim(array("origin" => "*")));
+$app->add(new \CorsSlim\CorsSlim(array("origin" => getenv('REQUEST_ORIGIN'))));
 
 // for getting token for JWT authentication, POST only
 $app->post('/token-auth', function () use ($app) {
@@ -77,7 +78,7 @@ $app->post('/token-auth', function () use ($app) {
         "iss" => getenv('JWT_NAMESPACE'),
         "sub" => $app->environment["PHP_AUTH_USER"],
         "aud" => $app->environment["PHP_AUTH_USER"], // "YOUR_CLIENT_ID",
-        "exp" => strtotime('10 hour'),
+        "exp" => strtotime('1 hour'), // or 'ttl' => 60
         "iat" => time());
 
     // we are using firebase/php-jwt ~2.0 due to dependency of tuupola/slim-jwt-auth 0.4.0
@@ -88,10 +89,11 @@ $app->post('/token-auth', function () use ($app) {
     // $decoded = \JWT::decode($jwt, $key, array('HS256'));
 
     $response["token"] = $jwt;
-    echo json_encode($response);
+    $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
 
 })->name('token-auth');
 
+// for getting token for JWT authentication, JSON data
 $app->post('/token', function () use ($app, $basicAuthenticator) {
 
     /*
@@ -112,26 +114,37 @@ $app->post('/token', function () use ($app, $basicAuthenticator) {
     }
 });
 
-/*
- * JWT Endpoint
- */
-$app->map('/test/basic-auth', function () {
+// testing API for basic auth
+$app->map('/test/basic-auth', function () use ($app) {
     // Header ["Authorization"] = "Basic XXXXXXXXXX"
     $response["status"] = "ok";
     $response["auth"] = "basic";
-    echo '{"d": ' . json_encode($response) . '}';
+    $response["user"] = $app->environment["PHP_AUTH_USER"];
+    $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
+
 })->via('GET', 'POST');
 
-$app->map('/test/jwt-auth', function () {
+// testing API for JWT auth
+$app->map('/test/jwt-auth', function () use ($app) {
     // Header ["Authorization"] = "Bearer XXXXXXXXXX"
     $response["status"] = "ok";
     $response["auth"] = "jwt";
-    echo '{"d": ' . json_encode($response) . '}';
+    $response["user"] = $app->jwt->sub;
+    $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
+
 })->via('GET', 'POST');
 
 /*
  * API Endpoint
  */
+$app->get('/user', function() use ($app) {
+
+    // the above basic auth method is just for demo
+    // below we assume jwt
+    $response["user"] = $app->jwt->sub;
+    $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
+});
+
 $app->get('/return/weekly/:year/:month/:day', function ($year, $month, $day) {
 
     // example - http://localhost:8080/api/return/weekly/2015/07/08
@@ -141,7 +154,8 @@ $app->get('/return/weekly/:year/:month/:day', function ($year, $month, $day) {
     $q = $db->query("call sp_IWAGetClientSeriesReturns('$year-$month-$day','Testing1');");
     $r = $q->fetchAllObject();
 
-    echo '{"d": ' . json_encode($r) . '}';
+    // echo '{"d": ' . json_encode($r) . '}';
+    $app->response->write(json_encode($r, JSON_UNESCAPED_SLASHES));
 });
 
 $app->run();
