@@ -30,7 +30,7 @@
 
                 // Return an $http request for the now authenticated
                 // user so that we can flatten the promise chain
-                return $http.get(apiService.concatAndResolveUrl('api/user'));
+                return $http.get(apiService.resolveUrl('api/user'));
 
                 // delete $http.defaults.headers.common['Authorization'];
             }, function(error) {
@@ -60,7 +60,8 @@
 
                 // Everything worked out so we can now redirect to
                 // the users state to view the data
-                $state.go($stateParams['goto']);
+                var loc = $stateParams['goto'] !== '' ? $stateParams['goto'] : 'main';
+                $state.go(loc);
             });
         }
 

@@ -145,9 +145,9 @@ $app->get('/user', function() use ($app) {
     $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
 });
 
-$app->get('/return/weekly/:year/:month/:day', function ($year, $month, $day) {
+$app->get('/return/weekly/:year/:month/:day', function ($year, $month, $day) use ($app) {
 
-    // example - http://localhost:8080/api/return/weekly/2015/07/08
+    // example - http://localhost:8080/api/return/weekly/2013/07/19
     // $asof = new DateTime("$year-$month-$day");
 
     $db = dbConx();

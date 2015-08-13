@@ -12,10 +12,10 @@ angular
     .module('ngSlimSampleApp', [
         'ngAnimate',
         'ngCookies',
-        'ngResource',
         'ngSanitize',
         'ngTouch',
-        'ui.router', 'satellizer'
+        'ui.router', 'ui.grid', 
+        'satellizer', 'restangular'
     ])
     .constant('urlConfig', {
         "url": "http://localhost",
@@ -36,13 +36,13 @@ angular
                     // Instead of checking for a status code of 400 which might be used
                     // for other reasons in Laravel, we check for the specific rejection
                     // reasons to tell us if we need to redirect to the login state
-                    var rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
+                    var rejectionReasons = ['token_not_provided', 'token_expired', 'Token not found', 'token_invalid'];
 
                     // Loop through each rejection reason and redirect to the login
                     // state if one is encountered
                     angular.forEach(rejectionReasons, function(value, key) {
 
-                        if (rejection.data.error === value) {
+                        if (rejection.data.status === 'error' && rejection.data.message === value) {
 
                             // If we get a rejection corresponding to one of the reasons
                             // in our array, we know we need to authenticate the user so 
@@ -88,6 +88,11 @@ angular
                 url: '/user',
                 templateUrl: 'views/user.html',
                 controller: 'UserCtrl as user'
+            })
+            .state('stat', {
+                url: '/user/stat',
+                templateUrl: 'views/stat.html',
+                controller: 'StatCtrl as stat'
             });
 
     }).run(function($rootScope, $state) {
@@ -115,6 +120,9 @@ angular
                 // we are grabbing what is in local storage
                 $rootScope.currentUser = user;
 
+                // TODO: Verify - this case should never happen in normal flow
+                // consider how to provide best UX when users bookmarked auth link, etc
+
                 // If the user is logged in and we hit the auth route we don't need
                 // to stay there and can send the user to the main state
                 if (toState.name === "auth") {
@@ -129,7 +137,7 @@ angular
 
             } else {
 
-                if (toState.name.indexOf("user") === 0) {
+                if (toState.url.indexOf("/user") === 0) {
                     event.preventDefault();              
                     $state.go('auth', { 'goto': toState.name });
                 }

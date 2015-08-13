@@ -11,7 +11,7 @@ angular.module('ngSlimSampleApp')
   .service('apiService', function (urlConfig) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
-    this.concatAndResolveUrl = function (concat) {
+    this.resolveUrl = function (concat) {
       var url = urlConfig.url + ":" + urlConfig.port;
 	  var url1 = url.split('/');
 	  var url2 = concat.split('/');
