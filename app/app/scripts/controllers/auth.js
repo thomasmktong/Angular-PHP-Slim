@@ -9,7 +9,7 @@
         .controller('AuthCtrl', AuthController);
 
 
-    function AuthController($auth, $state, $http, apiService, $rootScope) {
+    function AuthController($auth, $state, $stateParams, $http, apiService, $rootScope) {
 
         var vm = this;
 
@@ -60,7 +60,7 @@
 
                 // Everything worked out so we can now redirect to
                 // the users state to view the data
-                $state.go('user');
+                $state.go($stateParams['goto']);
             });
         }
 

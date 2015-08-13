@@ -1,30 +1,3 @@
-<div class="container">
-  <h2>My todos</h2>
-
-
-  <!-- Todos input -->
-  <form role="form" ng-submit="addTodo()">
-    <div class="row">
-      <div class="input-group">
-        <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
-        <span class="input-group-btn">
-          <input type="submit" class="btn btn-primary" value="Add">
-        </span>
-      </div>
-    </div>
-  </form>
-
-    <!-- Todos list -->
-
-  <p class="input-group" ng-repeat="todo in todos">
-    <input type="text" ng-model="todo" class="form-control">
-    <span class="input-group-btn">
-      <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
-    </span>
-  </p>
-</div>
-
-<!--
 <div class="jumbotron">
   <h1>'Allo, 'Allo!</h1>
   <p class="lead">
@@ -48,4 +21,3 @@
   <h4>Karma</h4>
   <p>Spectacular Test Runner for JavaScript.</p>
 </div>
--->
