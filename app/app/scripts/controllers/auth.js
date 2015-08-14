@@ -4,11 +4,6 @@
 
     'use strict';
 
-    angular
-        .module('ngSlimSampleApp')
-        .controller('AuthCtrl', AuthController);
-
-
     function AuthController($auth, $state, $stateParams, $http, apiService, $rootScope) {
 
         var vm = this;
@@ -18,7 +13,7 @@
             var credentials = {
                 user: vm.user,
                 password: vm.password
-            }
+            };
 
             // Ref: https://github.com/sahat/satellizer/issues/285
             // $http.defaults.headers.common.Authorization = 'Basic ' + btoa(credentials.user + ':' + credentials.password);
@@ -60,11 +55,15 @@
 
                 // Everything worked out so we can now redirect to
                 // the users state to view the data
-                var loc = $stateParams['goto'] !== '' ? $stateParams['goto'] : 'main';
+                var loc = $stateParams.goto !== '' ? $stateParams.goto : 'main';
                 $state.go(loc);
             });
-        }
+        };
 
     }
+
+    angular
+        .module('ngSlimSampleApp')
+        .controller('AuthCtrl', AuthController);
 
 })();

@@ -56,7 +56,7 @@ angular
 
                     return $q.reject(rejection);
                 }
-            }
+            };
         }
 
         // Setup for the $httpInterceptor
