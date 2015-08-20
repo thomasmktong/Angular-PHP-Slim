@@ -111,6 +111,10 @@ $app->post('/token', function () use ($app, $basicAuthenticator) {
         $app->environment["PHP_AUTH_USER"] = $data["user"];
         $route = $app->router()->getNamedRoute('token-auth');
         $route->dispatch();
+    } else {
+        $response["status"] = "error";
+        $response["message"] = "User ID or password incorrect";
+        $app->response->write(json_encode($response, JSON_UNESCAPED_SLASHES));
     }
 });
 
