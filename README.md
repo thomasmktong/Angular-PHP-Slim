@@ -1,4 +1,4 @@
-# Angular-PHP-Slim
+# Angular-PHP-Slim (With AdminLTE)
 
 My own scaffold of webapps using AngularJS as front-end and PHP Slim as back-end. This scaffold uses:
 * PHP 5.4+

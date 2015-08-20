@@ -11,7 +11,17 @@
     "satellizer": "~0.11.3",
     "angular-ui-router": "~0.2.15",
     "angular-ui-grid": "~3.0.3",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "font-awesome": "~4.4.0",
+    "ionicons": "~2.0.1",
+    "bower-jvectormap": "~1.2.2",
+    "jquery-sparkline": "~2.1.3",
+    "fastclick": "~1.0.6",
+    "chartjs": "~1.0.2",
+    "slimscroll": "~1.3.6",
+    "geopattern": "~1.2.3",
+    "bootstrap-sweetalert": "~0.4.5",
+    "angular-bootstrap-show-errors": "~2.3.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"
@@ -24,6 +34,17 @@
         "less/bootstrap.less",
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.css"
+      ]
+    },
+    "geopattern": {
+      "main": [
+        "js/geopattern.min.js"
       ]
     }
   }

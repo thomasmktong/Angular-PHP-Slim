@@ -1,16 +1,36 @@
 <!-- public/views/authView.html -->
-
-<div class="col-sm-4 col-sm-offset-4">
-    <div class="well">
-        <h3>Login</h3>
-        <form>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="User name" ng-model="auth.user">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
-            </div>
-            <button class="btn btn-primary" ng-click="auth.login()">Submit</button>
-        </form>
+<centered>
+    <div class="col-sm-4 col-sm-offset-4">
+        <div class="well insideLoginBox">
+            <h3><b>SAIL</b>AdminPage</h3>
+            <div class="alert alert-danger" role="alert" ng-show="accService.loginError">{{accService.loginErrorText}}</div>
+            <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+            <form name="userForm" novalidate>
+                <div class="form-group" show-errors>
+                    <input type="text" class="form-control" placeholder="User ID" name="userid" ng-model="user.userid" required />
+                    <p class="help-block" ng-if="userForm.userid.$error.required">The user's ID is required</p>
+                </div>
+                <div class="form-group" show-errors>
+                    <input type="password" class="form-control" placeholder="Password" name="password" ng-model="user.password" required>
+                    <p class="help-block" ng-if="userForm.password.$error.required">The user's password is required</p>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="login()" ng-disabled="userForm.$invalid">Submit</button>
+            </form>
+        </div>
     </div>
-</div>
+</centered>
+<style type="text/css">
+.ng-modal-overlay {
+    /* A dark translucent div that covers the whole screen */
+    position: absolute;
+    z-index: 9000;
+    /* the above html centered box is using 9999 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.8;
+}
+</style>
+<div class='ng-modal-overlay'></div>

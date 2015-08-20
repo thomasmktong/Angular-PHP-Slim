@@ -1,0 +1,9 @@
+/* style added by thomas for 'ui.bootstrap.showErrors' */
+/* http://blog.yodersolutions.com/bootstrap-form-validation-done-right-in-angularjs/?utm_source=github&utm_medium=readme&utm_campaign=code */
+.form-group .help-block {
+  display: none;
+}
+
+.form-group.has-error .help-block {
+  display: block;
+}
